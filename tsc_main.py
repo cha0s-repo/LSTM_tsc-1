@@ -10,15 +10,15 @@ import numpy as np
 import tensorflow as tf  #TF 1.1.0rc1
 tf.logging.set_verbosity(tf.logging.ERROR)
 import matplotlib.pyplot as plt
-from tsc_model import Model,sample_batch,load_data,check_test
+from tsc_model import Model,sample_batch,load_data
 
 #Set these directories
-direc = '/home/rob/Dropbox/ml_projects/LSTM/UCR_TS_Archive_2015'
-summaries_dir = '/home/rob/Dropbox/ml_projects/LSTM_TSC/log_tb'
+direc = 'data/UCR_TS_Archive_2015'
+summaries_dir = 'log/log_tb'
 
 """Load the data"""
 ratio = np.array([0.8,0.9]) #Ratios where to split the training and validation set
-X_train,X_val,X_test,y_train,y_val,y_test = load_data(direc,ratio,dataset='ChlorineConcentration')
+X_train,X_val,X_test,y_train,y_val,y_test = load_data(direc,ratio,dataset='Two_Patterns')
 N,sl = X_train.shape
 num_classes = len(np.unique(y_train))
 
@@ -26,7 +26,7 @@ num_classes = len(np.unique(y_train))
 batch_size = 30
 max_iterations = 3000
 dropout = 0.8
-config = {    'num_layers' :    3,               #number of layers of stacked RNN's
+config = {    'num_layers' :    1,               #number of layers of stacked RNN's
               'hidden_size' :   120,             #memory cells in a layer
               'max_grad_norm' : 5,             #maximum gradient norm during training
               'batch_size' :    batch_size,

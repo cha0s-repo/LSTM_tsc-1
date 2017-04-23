@@ -23,7 +23,7 @@ tf.logging.set_verbosity(tf.logging.ERROR)
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import clip_ops
 from tensorflow.contrib.rnn import LSTMCell
-from tensorflow.contrib.rnn.python.ops import core_rnn
+from tensorflow.contrib.rnn import static_rnn
 
 def load_data(direc,ratio,dataset):
   """Input:
@@ -80,7 +80,7 @@ class Model():
       initial_state = cell.zero_state(self.batch_size, tf.float32)
     
     input_list = tf.unstack(tf.expand_dims(self.input,axis=2),axis=1)
-    outputs,_ = core_rnn.static_rnn(cell, input_list, dtype=tf.float32)
+    outputs,_ = static_rnn(cell, input_list, initial_state=initial_state, dtype=tf.float32)
 
     output = outputs[-1]
 

@@ -2,6 +2,8 @@
 /saved_scripts
 /log_tb
 /conv_lstm_log_tb
+/data
+/log
 
 /visualize_ucr_data.m
 /.idea
